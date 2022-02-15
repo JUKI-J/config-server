@@ -1,4 +1,4 @@
-##gateway-local.yml
+##eureka-local.yml
 eureka:
   client:
     register-with-eureka: true
