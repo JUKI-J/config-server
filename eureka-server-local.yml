@@ -1,0 +1,6 @@
+eureka:
+  instance:
+    hostname: TRADING-EUREKA-SERVER
+  client:
+    register-with-eureka: false
+    fetch-registry: false
