@@ -30,7 +30,7 @@ management:
   endpoint:
     web:
       exposure:
-        include: health,info,beans
+        include: "*"
     shutdown:
       enabled: true
     health:
