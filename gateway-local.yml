@@ -1,9 +1,40 @@
 #gateway-local.yml
-eureka:
-  client:
-    register-with-eureka: true
-    fetch-registry: true
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-  instance:
-    hostname: localhost
+spring:
+  application:
+    name: TRADING-GATEWAY
+  cloud:
+    config:
+      profile: local
+      name: gateway,eureka-client
+    gateway:
+      httpclient:
+        connect-timeout: 3000
+        response-timeout: 3000ms
+
+#resilience4j
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        failureRateThreshold: 50
+        slowCallRateThreshold: 100
+        slowCallDurationThreshold: 60000
+        permittedNumberOfCallsInHalfOpenState: 4
+        maxWaitDurationInHalfOpenState: 1000
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 10
+        waitDurationInOpenState: 10000
+
+management:
+  endpoint:
+    web:
+      exposure:
+        include: "*"
+    shutdown:
+      enabled: true
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
